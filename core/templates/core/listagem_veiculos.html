@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Cadveic
+{% endblock %}
+
+{% block main %}
+   {% for i in dados %}
+      Placa {{ i.placa }} <br>
+      Modelo {{ i.modelo }} <br>
+   ----------------------------------- <br>
+   {% endfor %}
+{% endblock %}

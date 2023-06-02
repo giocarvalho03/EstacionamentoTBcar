@@ -1,0 +1,29 @@
+{%  extends 'base.html' %}
+
+{% block title %}
+    listRot
+{% endblock %}
+
+
+{% block main %}
+     <h3>Listagem de Rotativos</h3>
+    {% for i in dados %}
+        Veículo: {{ i.id_veiculo }}<br>
+        Entrada: {{ i.entrada }}<br>
+        Saída: {% if i.saida %} {{ i.saida }} {% endif %} <br>
+        Valor: {{ i.id_tabela }}<br>
+        Total: {% if i.total %} {{ i.total }} {% endif %}<br>
+        Pago: {% if i.pago %}
+                 <font color="green">Sim</font>
+              {% else %}
+                 <font color="red">Não</font>
+              {% endif %}
+        <br>
+        Obs. <br>
+        {{ i.observacoes }} <br>
+        <a href="{% url 'url_altera_rotativo' i.id %}">Editar</a>
+        <a href="{% url 'url_exclui_rotativo' i.id %}">Excluir</a>
+    <br>
+        -------------------------------------------<br>
+    {% endfor %}
+{% endblock %}

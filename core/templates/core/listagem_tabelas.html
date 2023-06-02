@@ -1,0 +1,16 @@
+{%  extends 'base.html' %}
+
+{% block title %}
+    listPrecos
+{% endblock %}
+
+
+{% block main %}
+     <h3>Tabela de Preços</h3>
+    {% for i in dados %}
+        Descrição: {{ i.descricao }}<br>
+        Valor: {{ i.valor }} <br>
+        <a href="{% url 'url_altera_tabela' i.id">Editar</a>
+        -------------------------------------------<br>
+    {% endfor %}
+{% endblock %}
