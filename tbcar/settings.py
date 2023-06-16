@@ -12,27 +12,27 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 
-
+import environ
+env = environ.Env( )
+environ.Env.read_env( )
 
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-import environ
-env = environ.Env( )
-environ.Env.read_env( os.path.join(BASE_DIR, '.env') )
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-gm^opef!lf0i@=q3bo2fwuq1r+h#g_w8qb1j%-4-wv#m-dt$ca'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -96,10 +96,9 @@ DATABASES = {
 }
 '''
 import dj_database_url
-DATABASE_URL = os.environ.get('DATABASE_URL')
-print(DATABASE_URL)
+
 DATABASES = {
-    'default': dj_database_url.parse('postgres://tbcar_db_470p_user:hfBm8Iw2rBiabJecUYEUzy0mjrfrI3dh@dpg-chsi1ol269vdk4nenfvg-a.oregon-postgres.render.com/tbcar_db_470p')
+    'default': dj_database_url.parse(env('DATABASE_URL'))
 }
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -136,7 +135,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [ os.path.join(BASE_DIR,'static_files')]
+#STATICFILES_DIRS = [ os.path.join(BASE_DIR,'static_files')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_files')
